@@ -181,7 +181,7 @@ void cpp_gen::visit(const mfast::decimal_field_instruction* inst, void* pIndex)
   out_ << "  decimal_value_storage(";
   if (!init_value.is_empty())
     out_ <<  init_value.of_decimal.mantissa_ << "LL, " << static_cast<int> (init_value.of_decimal.exponent_);
-  out_ << "), // initial_value\n"
+    out_ << "), // initial_value\n"
        << "  " << inst->tag() << ", // tag\n"
        << "  " << inst->decimal_place() << "); //decimal_place \n\n";
 
@@ -207,7 +207,8 @@ void cpp_gen::visit(const mfast::ascii_field_instruction* inst, void* pIndex)
   gen_string(inst, "ascii", pIndex);
   out_ <<  ", // initial_value\n"
        << "  " << inst->tag() << ", // tag\n"
-       << "  " << inst->decimal_place() << "); //decimal_place \n\n";
+       << "  " << inst->field_type_name() <<", //field_type \n"
+       << "   " << inst->decimal_place() << "); \n\n";
 }
 
 void cpp_gen::visit(const mfast::unicode_field_instruction* inst, void* pIndex)
@@ -568,7 +569,7 @@ void cpp_gen::visit(const mfast::template_instruction* inst, void*)
        << "  \"" << inst->typeref_ns() << "\", // typeRef ns \n"
        << "  \"\", // cpp_ns\n"
        << "  " << inst->tag() << ", // tag \n"
-       << "  " << inst->decimal_place() << "); //decimal_place \n\n";
+       << "  " << inst->decimal_place() << "); //decimal_place \n\n"
 
        << "  ptr_instruction = &the_instruction;\n"
        << "  return ptr_instruction;\n"
@@ -704,7 +705,7 @@ void cpp_gen::visit(const mfast::enum_field_instruction* inst, void* pIndex)
        << "  " << num_elements_name.str() << ",// num elements\n"
        << "  0, // ref_instruction\n"
        << "  0, // cpp_ns\n"
-       << "  " << inst->tag() << ", //tag \n";
+       << "  " << inst->tag() << ", //tag \n"
        << "  " << inst->decimal_place() << "); //decimal_place \n\n";
 
   if (pIndex == 0) {

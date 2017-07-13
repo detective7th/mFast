@@ -180,7 +180,8 @@ public:
                             uint64_t                      num_elements,
                             const enum_field_instruction* ref,
                             const char*                   cpp_ns,
-                            instruction_tag               tag=instruction_tag())
+                            instruction_tag               tag=instruction_tag(),
+                            int32_t                       decimal_place = 0)
     : enum_field_instruction(operator_id,
                              optional,
                              id,
@@ -193,7 +194,8 @@ public:
                              num_elements,
                              ref,
                              cpp_ns,
-                             tag)
+                             tag,
+                             decimal_place)
   {
   }
 

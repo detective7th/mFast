@@ -39,7 +39,7 @@ namespace mfast
                                const char*                     typeref_name,
                                const char*                     typeref_ns,
                                const char*                     cpp_ns,
-                               instruction_tag                 tag = instruction_tag()
+                               instruction_tag                 tag = instruction_tag(),
                                int32_t                         decimal_place = 0);
 
 
@@ -126,7 +126,7 @@ namespace mfast
                             const char*                    typeref_name,
                             const char*                    typeref_ns,
                             const char*                    cpp_ns,
-                            instruction_tag                tag = instruction_tag()
+                            instruction_tag                tag = instruction_tag(),
                             int32_t                        decimal_place = 0)
       : sequence_field_instruction(optional, id, name, ns, dictionary,
                                    subinstructions, element_instruction, ref_instruction, sequence_length_instruction,

@@ -112,7 +112,7 @@ namespace mfast
                           const char*          ns,
                           const op_context_t*  context,
                           int_value_storage<T> initial_value,
-                          instruction_tag      tag = instruction_tag()
+                          instruction_tag      tag = instruction_tag(),
                           int32_t              decimal_place = 0);
 
     int_field_instruction(const int_field_instruction& other);
@@ -130,7 +130,7 @@ namespace mfast
                                                   const char*          ns,
                                                   const op_context_t*  context,
                                                   int_value_storage<T> initial_value,
-                                                  instruction_tag      tag
+                                                  instruction_tag      tag,
                                                   int32_t              decimal_place)
     : integer_field_instruction_base(operator_id,
                                      field_type_trait<T>::id,

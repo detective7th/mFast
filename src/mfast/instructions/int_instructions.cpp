@@ -30,7 +30,7 @@ namespace mfast
                                                                  const op_context_t*  context,
                                                                  const value_storage& initial_storage,
                                                                  instruction_tag      tag,
-                                                                 int32_t              decimal_place = 0)
+                                                                 int32_t              decimal_place)
     : field_instruction(operator_id, field_type, optional, id, name, ns, tag, decimal_place)
     , op_context_(context)
     , initial_value_(initial_storage)

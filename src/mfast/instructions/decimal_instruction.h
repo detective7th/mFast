@@ -79,7 +79,8 @@ namespace mfast
                               const op_context_t*         exponent_context,
                               mantissa_field_instruction* mi,
                               decimal_value_storage       initial_value,
-                              instruction_tag             tag=instruction_tag())
+                              instruction_tag             tag=instruction_tag(),
+                              int32_t                     decimal_place = 0)
       : integer_field_instruction_base(exponent_operator_id,
                                        field_type_exponent,
                                        optional,
@@ -88,7 +89,8 @@ namespace mfast
                                        ns,
                                        exponent_context,
                                        initial_value.storage_,
-                                       tag)
+                                       tag,
+                                       decimal_place)
     {
       mantissa_instruction(mi);
     }
