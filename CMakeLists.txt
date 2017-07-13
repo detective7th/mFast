@@ -27,7 +27,7 @@ include(CPack)
 
 
 # flag to enable building shared/dynamic library
-set(BUILD_SHARED_LIBS OFF CACHE BOOL "build shared/dynamic library")
+set(BUILD_SHARED_LIBS ON CACHE BOOL "build shared/dynamic library")
 # Offer the user the choice of overriding the installation directories
 set(INSTALL_LIB_DIR lib CACHE PATH "Installation directory for libraries")
 set(INSTALL_BIN_DIR bin CACHE PATH "Installation directory for executables")

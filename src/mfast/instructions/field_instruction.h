@@ -157,6 +157,11 @@ namespace mfast {
       return nullable_flag_;
     }
 
+    const int32_t decimal_place() const 
+    { 
+      return decimal_place_; 
+    }
+
     bool optional() const
     {
       return optional_flag_;
@@ -216,6 +221,11 @@ namespace mfast {
       update_invariant();
     }
 
+    void decimal_place(int32_t v) 
+    { 
+      decimal_place_ = v; 
+    }
+
     void id(uint32_t v)
     {
       id_ = v;
@@ -259,6 +269,7 @@ namespace mfast {
     uint16_t mandatory_no_initial_value_ : 1;
     uint16_t field_type_ : 8;
     uint32_t id_;
+    int32_t decimal_place_;
     const char* name_;
     const char* ns_;
     instruction_tag tag_;

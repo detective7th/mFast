@@ -87,7 +87,10 @@ namespace mfast {
     {
       return !absent ();
     }
-
+    int32_t decimal_place() const 
+    { 
+      return instruction_->decimal_place(); 
+    }
     bool optional() const
     {
       return instruction_->optional();

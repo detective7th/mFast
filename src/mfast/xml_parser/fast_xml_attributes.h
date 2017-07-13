@@ -40,6 +40,7 @@ namespace mfast
       const char* presence_;
       const char* charset_;
       const char* tag_;
+      const char *decimal_place_;
 
       fast_xml_attributes()
         : name_(0)
@@ -75,7 +76,7 @@ namespace mfast
         presence_ = 0;
         charset_ = 0;
         tag_ = 0;
-
+        decimal_place_=0;
         set(attr);
       }
 
@@ -101,6 +102,8 @@ namespace mfast
             charset_ = attr->Value();
           else if (std::strcmp(name, "mfast:tag") == 0)
             tag_ = attr->Value();
+          else if (std::strcmp(name, "decimalPlaces") == 0)
+            decimal_place_ = attr->Value();
           attr = attr->Next();
         }
       }
@@ -124,6 +127,11 @@ namespace mfast
       const char* get_ns(const field_instruction* inst, arena_allocator& alloc) const
       {
         return ns_ ? string_dup(ns_, alloc) : inst->ns();
+      }
+
+      int32_t get_decimal_place(const field_instruction* inst) const
+      { 
+        return decimal_place_ ? boost::lexical_cast<int32_t>(decimal_place_) : inst->decimal_place();
       }
 
     };

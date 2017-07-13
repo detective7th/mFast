@@ -184,7 +184,7 @@ namespace mfast
         int_value_storage<IntType>(fop.initial_value_),
         parse_tag(inst)
         );
-
+      instruction->decimal_place(this->get_decimal_place(instruction));
       parent_->add_instruction(instruction);
     }
 
@@ -267,7 +267,7 @@ namespace mfast
           decimal_value_storage(decimal_op.initial_value_),
           parse_tag(inst));
       }
-
+      instruction->decimal_place(this->get_decimal_place(instruction));
       parent_->add_instruction(instruction);
     }
 
@@ -284,6 +284,7 @@ namespace mfast
         string_value_storage(fop.initial_value_),
         parse_tag(inst)
         );
+      instruction->decimal_place(this->get_decimal_place(instruction));
       parent_->add_instruction(instruction);
     }
 
@@ -313,6 +314,7 @@ namespace mfast
         get_length_ns(inst, length_attrs),
         parse_tag(inst)
         );
+      instruction->decimal_place(this->get_decimal_place(instruction));
       parent_->add_instruction(instruction);
     }
 
@@ -342,6 +344,7 @@ namespace mfast
         get_length_ns(inst, length_attrs),
         parse_tag(inst)
         );
+      instruction->decimal_place(this->get_decimal_place(instruction));
       parent_->add_instruction(instruction);
     }
 
@@ -353,6 +356,7 @@ namespace mfast
         get_name(alloc()),
         get_ns(inst, alloc()),
         parse_tag(inst));
+      instruction->decimal_place(this->get_decimal_place(instruction));
       parent_->add_instruction(instruction);
     }
 
@@ -364,6 +368,7 @@ namespace mfast
         get_name(alloc()),
         get_ns(inst, alloc()),
         parse_tag(inst));
+      instruction->decimal_place(this->get_decimal_place(instruction));
       parent_->add_instruction(instruction);
     }
 
@@ -375,6 +380,7 @@ namespace mfast
         get_name(alloc()),
         get_ns(inst, alloc()),
         parse_tag(inst));
+      instruction->decimal_place(this->get_decimal_place(instruction));
       parent_->add_instruction(instruction);
     }
 
@@ -386,6 +392,7 @@ namespace mfast
         get_name(alloc()),
         get_ns(inst, alloc()),
         parse_tag(inst));
+      instruction->decimal_place(this->get_decimal_place(instruction));
       parent_->add_instruction(instruction);
     }
 
@@ -428,12 +435,14 @@ namespace mfast
         if (target->subinstructions().size() == 1 && target->subinstruction(0)->field_type() == field_type_sequence)
         {
           field_instruction* new_inst = target->subinstruction(0)->clone(alloc());
+          new_inst->decimal_place(this->get_decimal_place(new_inst));
           parent_->add_instruction(new_inst);
           static_cast<sequence_field_instruction*>(new_inst)->ref_instruction(target);
         }
         else {
           for (size_t i = 0; i < target->subinstructions().size(); ++i) {
-            const field_instruction* sub_inst = target->subinstruction(i);
+            field_instruction *sub_inst=target->subinstruction(i)->clone(alloc());
+            sub_inst->decimal_place(this->get_decimal_place(sub_inst));
             parent_->add_instruction(sub_inst);
           }
         }
@@ -442,7 +451,7 @@ namespace mfast
 
         instruction = new (alloc())templateref_instruction(
           static_cast<uint16_t>(parent_->num_instructions()));
-
+        instruction->decimal_place(this->get_decimal_place(instruction));
         parent_->add_instruction(instruction);
 
       }
@@ -512,7 +521,7 @@ namespace mfast
       else {
         instruction->ref_instruction(inst);
       }
-
+      instruction->decimal_place(this->get_decimal_place(instruction));
       parent_->add_instruction(instruction);
     }
 
@@ -592,7 +601,7 @@ namespace mfast
         parse_tag(inst)
         );
 
-
+      instruction->decimal_place(this->get_decimal_place(instruction));
       parent_->add_instruction(instruction);
     }
 
@@ -766,7 +775,7 @@ namespace mfast
         inst->cpp_ns(),
         parse_tag(inst)
         );
-
+      instruction->decimal_place(this->get_decimal_place(instruction));
       parent_->add_instruction(instruction);
     }
 

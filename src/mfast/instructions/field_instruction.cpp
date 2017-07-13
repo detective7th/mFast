@@ -54,6 +54,7 @@ namespace mfast {
     , name_(other.name_)
     , ns_(other.ns_)
     , tag_(other.tag_)
+    , decimal_place_(other.decimal_place_)
   {
   }
 
