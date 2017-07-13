@@ -32,13 +32,15 @@ namespace mfast
                                                    const op_context_t*  context,
                                                    string_value_storage initial_value,
                                                    instruction_tag      tag,
-                                                   field_type_enum_t    field_type)
+                                                   field_type_enum_t    field_type,
+                                                   int32_t              decimal_place)
     :  vector_field_instruction_base(operator_id,
                                      field_type,
                                      optional,
                                      id, name, ns,
                                      sizeof(char),
-                                     tag)
+                                     tag,
+                                     decimal_place)
     , op_context_(context)
     , initial_value_(initial_value.storage_)
     , prev_value_(&prev_storage_)

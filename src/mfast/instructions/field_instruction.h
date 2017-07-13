@@ -211,7 +211,8 @@ namespace mfast {
                       uint32_t        id,
                       const char*     name,
                       const char*     ns,
-                      instruction_tag tag);
+                      instruction_tag tag,
+                      int32_t decimal_place = 0);
 
     field_instruction(const field_instruction& other);
 

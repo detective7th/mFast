@@ -122,27 +122,31 @@ void cpp_gen::gen_integer(const mfast::integer_field_instruction_base* inst,
 {
   gen_field(inst, gen_op_context(inst->name(), inst->op_context()), cpp_type, pIndex);
   out_ << "  int_value_storage<"<< cpp_type << "_t>(" << initial_value   << "), // initial_value\n"
-       << "  " << inst->tag() << "); // tag\n\n";
+       << "  " << inst->tag() << ", // tag\n";
 }
 
 void cpp_gen::visit(const mfast::int32_field_instruction* inst, void* pIndex)
 {
   gen_integer(inst, "int32", get_initial_value<int32_t>(inst->initial_value(), ""), pIndex );
+  out_ << "  " << inst->decimal_place() << "); //decimal_place \n\n";
 }
 
 void cpp_gen::visit(const mfast::uint32_field_instruction* inst, void* pIndex)
 {
   gen_integer(inst, "uint32", get_initial_value<uint32_t>(inst->initial_value(), "U"), pIndex  );
+  out_ << "  " << inst->decimal_place() << "); //decimal_place \n\n";
 }
 
 void cpp_gen::visit(const mfast::int64_field_instruction* inst, void* pIndex)
 {
   gen_integer(inst, "int64", get_initial_value<int64_t>(inst->initial_value(), "LL"), pIndex  );
+  out_ << "  " << inst->decimal_place() << "); //decimal_place \n\n";
 }
 
 void cpp_gen::visit(const mfast::uint64_field_instruction* inst, void* pIndex)
 {
   gen_integer(inst, "uint64", get_initial_value<uint64_t>(inst->initial_value(), "ULL"), pIndex  );
+  out_ << "  " << inst->decimal_place() << "); //decimal_place \n\n";
 }
 
 void cpp_gen::visit(const mfast::decimal_field_instruction* inst, void* pIndex)
@@ -178,7 +182,8 @@ void cpp_gen::visit(const mfast::decimal_field_instruction* inst, void* pIndex)
   if (!init_value.is_empty())
     out_ <<  init_value.of_decimal.mantissa_ << "LL, " << static_cast<int> (init_value.of_decimal.exponent_);
   out_ << "), // initial_value\n"
-       << "  " << inst->tag() << "); // tag\n\n";
+       << "  " << inst->tag() << ", // tag\n"
+       << "  " << inst->decimal_place() << "); //decimal_place \n\n";
 
 }
 
@@ -201,7 +206,8 @@ void cpp_gen::visit(const mfast::ascii_field_instruction* inst, void* pIndex)
 {
   gen_string(inst, "ascii", pIndex);
   out_ <<  ", // initial_value\n"
-       << "  " << inst->tag() << "); // tag\n\n";
+       << "  " << inst->tag() << ", // tag\n"
+       << "  " << inst->decimal_place() << "); //decimal_place \n\n";
 }
 
 void cpp_gen::visit(const mfast::unicode_field_instruction* inst, void* pIndex)
@@ -211,12 +217,14 @@ void cpp_gen::visit(const mfast::unicode_field_instruction* inst, void* pIndex)
     out_ << ", // initial value\n"
          << "  " << inst->length_id() << ", // length id\n"
          << "  \"" <<  inst->length_name() << "\", // length name\n"
-         << "  \"" << inst->length_ns() << "\"); // length ns\n\n";
+         << "  \"" << inst->length_ns() << "\", // length ns\n";
   }
   else {
     out_ << ", // initial_value\n"
-         << "  " << inst->tag() << "); // tag\n\n";
+         << "  " << inst->tag() << ", // tag\n";
+    
   }
+  out_ << "  " << inst->decimal_place() << "); //decimal_place \n\n";
 }
 
 void cpp_gen::visit(const mfast::byte_vector_field_instruction* inst, void* pIndex)
@@ -247,12 +255,13 @@ void cpp_gen::visit(const mfast::byte_vector_field_instruction* inst, void* pInd
          << "  " << inst->length_id() << ", // length id\n"
          << "  \"" <<  inst->length_name() << "\", // length name\n"
          << "  \"" << inst->length_ns() << "\", // length ns\n"
-         << "  " << inst->tag() << "); // tag\n\n";
+         << "  " << inst->tag() << ", // tag\n";
   }
   else {
     out_ << ", // initial_value\n"
-         << "  " << inst->tag() << "); // tag\n\n";
+         << "  " << inst->tag() << ", // tag\n";
   }
+  out_ << "  " << inst->decimal_place() << "); //decimal_place \n\n";
 }
 
 void cpp_gen::gen_int_vector(const char* cpp_type, const mfast::vector_field_instruction_base* inst, void* /*pIndex*/)
@@ -266,7 +275,7 @@ void cpp_gen::gen_int_vector(const char* cpp_type, const mfast::vector_field_ins
        << "  " << inst->id() << ", // id\n"
        << "  \""<< inst->name() << "\", // name\n"
        << "  \""<< inst->ns() << "\", // ns\n"
-       << "  " << inst->tag() << "); // tag\n\n";
+       << "  " << inst->tag() << ", // tag\n";
 
   add_to_instruction_list(name);
 }
@@ -274,21 +283,25 @@ void cpp_gen::gen_int_vector(const char* cpp_type, const mfast::vector_field_ins
 void cpp_gen::visit(const mfast::int32_vector_field_instruction* inst, void* pIndex)
 {
   gen_int_vector("int32_vector", inst, pIndex);
+  out_ << "  " << inst->decimal_place() << "); //decimal_place \n\n";
 }
 
 void cpp_gen::visit(const mfast::uint32_vector_field_instruction* inst, void* pIndex)
 {
   gen_int_vector("uint32_vector", inst, pIndex);
+  out_ << "  " << inst->decimal_place() << "); //decimal_place \n\n";
 }
 
 void cpp_gen::visit(const mfast::int64_vector_field_instruction* inst, void* pIndex)
 {
   gen_int_vector("int64_vector", inst, pIndex);
+  out_ << "  " << inst->decimal_place() << "); //decimal_place \n\n";
 }
 
 void cpp_gen::visit(const mfast::uint64_vector_field_instruction* inst, void* pIndex)
 {
   gen_int_vector("uint64_vector", inst, pIndex);
+  out_ << "  " << inst->decimal_place() << "); //decimal_place \n\n";
 }
 
 void cpp_gen::output_subinstructions()
@@ -397,7 +410,8 @@ void cpp_gen::visit(const mfast::group_field_instruction* inst, void* pIndex)
        << "  \"" << inst->typeref_name() << "\", // typeRef name \n"
        << "  \"" << inst->typeref_ns() << "\", // typeRef ns \n"
        << "  \"\", // cpp_ns\n"
-       << "  " << inst->tag() << "); // tag\n\n";
+       << "  " << inst->tag() << ", // tag\n"
+       << "  " << inst->decimal_place() << "); //decimal_place \n\n";
 
   if (pIndex == 0) {
     out_ << "  return &the_instruction;\n"
@@ -510,7 +524,8 @@ void cpp_gen::visit(const mfast::sequence_field_instruction* inst, void* pIndex)
        << "  \"" << inst->typeref_name() << "\", // typeRef name \n"
        << "  \"" << inst->typeref_ns() << "\", // typeRef ns \n"
        << "  \"\", // cpp_ns\n"
-       << "  " << inst->tag() << "); //tag \n\n";
+       << "  " << inst->tag() << ", //tag \n"
+       << "  " << inst->decimal_place() << "); //decimal_place \n\n";
 
   if (pIndex == 0) {
     out_ << "  return &the_instruction;\n"
@@ -552,7 +567,9 @@ void cpp_gen::visit(const mfast::template_instruction* inst, void*)
        << "  \"" << inst->typeref_name() << "\", // typeRef name \n"
        << "  \"" << inst->typeref_ns() << "\", // typeRef ns \n"
        << "  \"\", // cpp_ns\n"
-       << "  " << inst->tag() << "); // tag \n\n"
+       << "  " << inst->tag() << ", // tag \n"
+       << "  " << inst->decimal_place() << "); //decimal_place \n\n";
+
        << "  ptr_instruction = &the_instruction;\n"
        << "  return ptr_instruction;\n"
        << "}\n\n";
@@ -564,7 +581,8 @@ void cpp_gen::visit(const mfast::templateref_instruction* inst, void* pIndex)
 
   out_ << "static const templateref_instruction\n"
        << prefix_string() << "templateref" << index << "_instruction(\n"
-       << "  " << inst->tag() << "); // tag\n\n";
+       << "  " << inst->tag() << ", // tag\n"
+       << "  " << inst->decimal_place() << "); //decimal_place \n\n";
 
   std::stringstream tmp;
   tmp << "templateref" << index;
@@ -686,7 +704,8 @@ void cpp_gen::visit(const mfast::enum_field_instruction* inst, void* pIndex)
        << "  " << num_elements_name.str() << ",// num elements\n"
        << "  0, // ref_instruction\n"
        << "  0, // cpp_ns\n"
-       << "  " << inst->tag() << "); //tag \n\n";
+       << "  " << inst->tag() << ", //tag \n";
+       << "  " << inst->decimal_place() << "); //decimal_place \n\n";
 
   if (pIndex == 0) {
     out_ << "  return &the_instruction;\n"

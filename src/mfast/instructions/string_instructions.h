@@ -35,7 +35,8 @@ namespace mfast
                             const op_context_t*  context,
                             string_value_storage initial_value,
                             instruction_tag      tag = instruction_tag(),
-                            field_type_enum_t    field_type = field_type_ascii_string);
+                            field_type_enum_t    field_type = field_type_ascii_string,
+                            int32_t              decimal_place = 0);
 
     ascii_field_instruction(const ascii_field_instruction& other);
 
@@ -117,13 +118,15 @@ namespace mfast
                               const char*          length_name ,//= "",
                               const char*          length_ns ,//= "",
                               instruction_tag      tag = instruction_tag(),
-                              field_type_enum_t    field_type = field_type_unicode_string)
+                              field_type_enum_t    field_type = field_type_unicode_string,
+                              int32_t              decimal_place = 0)
       :  ascii_field_instruction(operator_id,
                                  optional,
                                  id, name, ns, context,
                                  initial_value,
                                  tag,
-                                 field_type)
+                                 field_type,
+                                 decimal_place)
       , length_id_(length_id)
       , length_name_(length_name)
       , length_ns_(length_ns)

@@ -37,7 +37,8 @@ namespace mfast
                                   uint32_t             length_id ,
                                   const char*          length_name,
                                   const char*          length_ns,
-                                  instruction_tag      tag=instruction_tag())
+                                  instruction_tag      tag=instruction_tag(),
+                                  int32_t              decimal_place = 0)
       :  unicode_field_instruction(operator_id,
                                    optional,
                                    id, name, ns, context,
@@ -46,7 +47,8 @@ namespace mfast
                                    length_name,
                                    length_ns,
                                    tag,
-                                   field_type_byte_vector)
+                                   field_type_byte_vector,
+                                   decimal_place)
     {
     }
 

@@ -35,14 +35,16 @@ namespace mfast
                                   const char*       name,
                                   const char*       ns,
                                   std::size_t       element_size,
-                                  instruction_tag   tag)
+                                  instruction_tag   tag,
+                                  int32_t           decimal_place = 0)
       : field_instruction(operator_id,
                           field_type,
                           optional,
                           id,
                           name,
                           ns,
-                          tag)
+                          tag,
+                          decimal_place)
       , element_size_(element_size)
     {
     }

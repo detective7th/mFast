@@ -33,7 +33,8 @@ namespace mfast
                                                          const char*                     typeref_name,
                                                          const char*                     typeref_ns,
                                                          const char*                     cpp_ns,
-                                                         instruction_tag                 tag)
+                                                         instruction_tag                 tag
+                                                         int32_t                         decimal_place)
     : group_field_instruction(optional,
                               id,
                               name,
@@ -43,7 +44,8 @@ namespace mfast
                               typeref_name,
                               typeref_ns,
                               cpp_ns,
-                              tag)
+                              tag,
+                              decimal_place)
     , sequence_length_instruction_(sequence_length_instruction)
     , element_instruction_(element_instruction)
   {

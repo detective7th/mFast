@@ -21,14 +21,15 @@
 namespace mfast
 {
 
-  templateref_instruction::templateref_instruction(instruction_tag tag)
+  templateref_instruction::templateref_instruction(instruction_tag tag, int32_t decimal_place)
     : field_instruction(operator_none,
                         field_type_templateref,
                         presence_mandatory,
                         0,
                         "",
                         "",
-                        tag)
+                        tag,
+                        decimal_place)
   {
   }
 

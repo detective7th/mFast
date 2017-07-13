@@ -55,7 +55,8 @@ namespace mfast
                               const char*           ns,
                               const op_context_t*   decimal_context,
                               decimal_value_storage initial_value,
-                              instruction_tag       tag=instruction_tag())
+                              instruction_tag       tag=instruction_tag(),
+                              int32_t               decimal_place = 0)
       : integer_field_instruction_base(decimal_operator_id,
                                        field_type_decimal,
                                        optional,
@@ -64,7 +65,8 @@ namespace mfast
                                        ns,
                                        decimal_context,
                                        initial_value.storage_,
-                                       tag)
+                                       tag,
+                                       decimal_place)
       , mantissa_instruction_(0)
     {
     }

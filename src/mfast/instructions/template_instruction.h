@@ -37,7 +37,8 @@ namespace mfast
                          const char*         typeref_name,
                          const char*         typeref_ns,
                          const char*         cpp_ns,
-                         instruction_tag     tag = instruction_tag())
+                         instruction_tag     tag = instruction_tag(),
+                         int32_t             decimal_place = 0)
       : group_field_instruction(presence_mandatory,
                                 id,
                                 name,
@@ -47,7 +48,8 @@ namespace mfast
                                 typeref_name,
                                 typeref_ns,
                                 cpp_ns,
-                                tag)
+                                tag,
+                                decimal_place)
       , template_ns_(template_ns)
       , reset_(reset)
     {
@@ -102,9 +104,10 @@ namespace mfast
                             const char*         typeref_name,
                             const char*         typeref_ns,
                             const char*         cpp_ns,
-                            instruction_tag     tag = instruction_tag())
+                            instruction_tag     tag = instruction_tag(),
+                            int32_t             decimal_place = 0)
       : template_instruction(id, name, ns, template_ns, dictionary,
-                             subinstructions, reset, typeref_name, typeref_ns,cpp_ns, tag)
+                             subinstructions, reset, typeref_name, typeref_ns,cpp_ns, tag, decimal_place)
     {
     }
 

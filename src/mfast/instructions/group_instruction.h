@@ -42,14 +42,16 @@ namespace mfast
                             const char*         typeref_name,
                             const char*         typeref_ns,
                             const char*         cpp_ns,
-                            instruction_tag     tag = instruction_tag())
+                            instruction_tag     tag = instruction_tag(),
+                            int32_t             decimal_place = 0)
       : field_instruction(operator_none,
                           field_type_group,
                           optional,
                           id,
                           name,
                           ns,
-                          tag)
+                          tag,
+                          decimal_place)
       , referable_instruction<group_field_instruction>(0, cpp_ns)
       , dictionary_(dictionary)
       , typeref_name_(typeref_name)
@@ -181,7 +183,8 @@ namespace mfast
                          const char*         typeref_name,
                          const char*         typeref_ns,
                          const char*         cpp_ns,
-                         instruction_tag     tag = instruction_tag())
+                         instruction_tag     tag = instruction_tag(),
+                         int32_t             decimal_place = 0)
       : group_field_instruction(optional,
                                 id,
                                 name,
@@ -191,7 +194,8 @@ namespace mfast
                                 typeref_name,
                                 typeref_ns,
                                 cpp_ns,
-                                tag)
+                                tag,
+                                decimal_place)
     {
     }
 
@@ -204,7 +208,8 @@ namespace mfast
                          const char*                    typeref_name,
                          const char*                    typeref_ns,
                          const char*                    cpp_ns,
-                         instruction_tag                tag = instruction_tag())
+                         instruction_tag                tag = instruction_tag(),
+                         int32_t                        decimal_place = 0)
       : group_field_instruction(optional,
                                 id,
                                 name,
@@ -214,7 +219,8 @@ namespace mfast
                                 typeref_name,
                                 typeref_ns,
                                 cpp_ns,
-                                tag)
+                                tag,
+                                decimal_place)
     {
       this->ref_instruction(ref_instruction);
     }

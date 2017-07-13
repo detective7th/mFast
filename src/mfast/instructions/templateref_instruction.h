@@ -29,7 +29,7 @@ namespace mfast
   public:
 
 
-    templateref_instruction(instruction_tag tag = instruction_tag());
+    templateref_instruction(instruction_tag tag = instruction_tag(), int32_t decimal_place = 0);
 
     virtual void construct_value(value_storage& storage,
                                  allocator*     alloc) const;

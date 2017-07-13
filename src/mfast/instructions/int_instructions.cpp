@@ -29,8 +29,9 @@ namespace mfast
                                                                  const char*          ns,
                                                                  const op_context_t*  context,
                                                                  const value_storage& initial_storage,
-                                                                 instruction_tag      tag)
-    : field_instruction(operator_id, field_type, optional, id, name, ns, tag)
+                                                                 instruction_tag      tag,
+                                                                 int32_t              decimal_place = 0)
+    : field_instruction(operator_id, field_type, optional, id, name, ns, tag, decimal_place)
     , op_context_(context)
     , initial_value_(initial_storage)
     , prev_value_(&prev_storage_)

@@ -27,7 +27,8 @@ namespace mfast {
                                        uint32_t        id,
                                        const char*     name,
                                        const char*     ns,
-                                       instruction_tag tag)
+                                       instruction_tag tag,
+                                       int32_t  decimal_place)
     : operator_id_(operator_id)
     , is_array_(field_type >= field_type_ascii_string && field_type <= field_type_sequence )
     , optional_flag_(optional)
@@ -39,6 +40,7 @@ namespace mfast {
     , name_(name)
     , ns_(ns)
     , tag_(tag)
+    , decimal_place_(decimal_place)
   {
   }
 
