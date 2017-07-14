@@ -1,3 +1,5 @@
+本次提交修改了获取decimalPlaces特性的接口，访问xx的decimalPlaces的接口为xx_cref.decimal_place()。
+
 #########################################
 这部分是在mfast的基础上加上decimalPlaces特性后的安装说明：
 level2代码使用的mfast需要是tag v1.2.1版本，并且需要使用动态库（默认不生成动态库），这份代码是在tag v1.2.1的基础上进行修改的，并且把BUILD_SHARED_LIBS由默认的OFF改为ON，因此只需要按照下面的安装步骤操作即可。
