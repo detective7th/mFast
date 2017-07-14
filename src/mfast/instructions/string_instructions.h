@@ -35,8 +35,12 @@ namespace mfast
                             const op_context_t*  context,
                             string_value_storage initial_value,
                             instruction_tag      tag = instruction_tag(),
+<<<<<<< HEAD
                             field_type_enum_t    field_type = field_type_ascii_string,
                             int32_t              decimal_place = 0);
+=======
+                            field_type_enum_t    field_type = field_type_ascii_string);
+>>>>>>> 1c9fb3458a2835e50480f5eaa6f218399bb29754
 
     ascii_field_instruction(const ascii_field_instruction& other);
 

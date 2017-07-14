@@ -557,7 +557,8 @@ namespace mfast
           length_instruction->name(),
           length_instruction->ns(),
           length_instruction->op_context(),
-          int_value_storage<uint32_t>(length_instruction->initial_value())
+          int_value_storage<uint32_t>(length_instruction->initial_value()),
+          length_instruction->decimal_place()
           );
       }
       return length_instruction;

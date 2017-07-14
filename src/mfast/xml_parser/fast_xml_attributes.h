@@ -51,6 +51,7 @@ namespace mfast
         , presence_(0)
         , charset_(0)
         , tag_(0)
+        , decimal_place_(0)
       {
       }
 
