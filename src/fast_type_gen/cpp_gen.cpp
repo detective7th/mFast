@@ -183,8 +183,7 @@ void cpp_gen::visit(const mfast::ascii_field_instruction *inst, void *pIndex) {
   gen_string(inst, "ascii", pIndex);
   out_ << ", // initial_value\n"
        << "  " << inst->tag() << ", // tag\n"
-       << "  " << inst->field_type_name() <<", //field_type \n"
-       << "  " << inst->decimal_place() << "); \n\n";
+       << "  " << inst->field_type_name() <<"); //field_type \n\n";
 }
 
 void cpp_gen::visit(const mfast::unicode_field_instruction *inst,
@@ -197,10 +196,8 @@ void cpp_gen::visit(const mfast::unicode_field_instruction *inst,
          << "  \"" << inst->length_ns() << "\"); // length ns\n\n";
   } else {
     out_ << ", // initial_value\n"
-         << "  " << inst->tag() << ", // tag\n";
-
+         << "  " << inst->tag() << "\"); // tag\n";
   }
-  out_ << "  " << inst->decimal_place() << "); //decimal_place \n\n";
 }
 
 void cpp_gen::visit(const mfast::byte_vector_field_instruction *inst,
@@ -531,8 +528,7 @@ void cpp_gen::visit(const mfast::template_instruction *inst, void *) {
        << "  \"" << inst->typeref_name() << "\", // typeRef name \n"
        << "  \"" << inst->typeref_ns() << "\", // typeRef ns \n"
        << "  \"\", // cpp_ns\n"
-       << "  " << inst->tag() << ", // tag \n"
-       << "  " << inst->decimal_place() << "); //decimal_place \n\n"
+       << "  " << inst->tag() << "); // tag \n\n"
 
        << "  ptr_instruction = &the_instruction;\n"
        << "  return ptr_instruction;\n"
@@ -544,8 +540,7 @@ void cpp_gen::visit(const mfast::templateref_instruction *inst, void *pIndex) {
 
   out_ << "static const templateref_instruction\n" << prefix_string()
        << "templateref" << index << "_instruction(\n"
-       << "  " << inst->tag() << ", // tag\n"
-       << "  " << inst->decimal_place() << "); //decimal_place \n\n";
+       << "  " << inst->tag() << "); // tag\n\n";
 
   std::stringstream tmp;
   tmp << "templateref" << index;

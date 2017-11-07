@@ -20,10 +20,10 @@ public:
                          const char **elements, const uint64_t *element_values,
                          uint64_t num_elements,
                          const enum_field_instruction *ref, const char *cpp_ns,
-                         instruction_tag tag = instruction_tag(), int32_t decimal_place = 0)
+                         instruction_tag tag = instruction_tag())
       : integer_field_instruction_base(operator_id, field_type_enum, optional,
                                        id, name, ns, context,
-                                       initial_value.storage_, tag, decimal_place),
+                                       initial_value.storage_, tag),
         referable_instruction<enum_field_instruction>(ref, cpp_ns),
         elements_(elements), num_elements_(num_elements),
         element_values_(element_values) {}
