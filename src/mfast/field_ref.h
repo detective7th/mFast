@@ -23,6 +23,16 @@ struct sequence_iterator_base;
 
 struct field_cref_core_access;
 
+  namespace detail {
+    extern MFAST_EXPORT const value_storage null_storage;
+  }
+
+
+  template <typename ElementRef, bool IsElementAggregate>
+  struct sequence_iterator_base;
+
+  struct field_cref_core_access;
+
 class bad_optional_access : public virtual boost::exception,
                             virtual public std::logic_error {
 public:

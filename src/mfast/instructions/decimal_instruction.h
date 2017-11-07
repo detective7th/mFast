@@ -26,14 +26,24 @@ class MFAST_EXPORT decimal_field_instruction
     : public integer_field_instruction_base {
 public:
   decimal_field_instruction(operator_enum_t decimal_operator_id,
-                            presence_enum_t optional, uint32_t id,
-                            const char *name, const char *ns,
+                            presence_enum_t optional,
+                            uint32_t id,
+                            const char *name,
+                            const char *ns,
                             const op_context_t *decimal_context,
                             decimal_value_storage initial_value,
-                            instruction_tag tag = instruction_tag())
-      : integer_field_instruction_base(decimal_operator_id, field_type_decimal,
-                                       optional, id, name, ns, decimal_context,
-                                       initial_value.storage_, tag),
+                            instruction_tag tag = instruction_tag(),
+                            int32_t               decimal_place = 0)
+      : integer_field_instruction_base(decimal_operator_id,
+                                       field_type_decimal,
+                                       optional,
+                                       id,
+                                       name,
+                                       ns,
+                                       decimal_context,
+                                       initial_value.storage_,
+                                       tag,
+                                       decimal_place),
         mantissa_instruction_(nullptr) {}
 
   decimal_field_instruction(operator_enum_t exponent_operator_id,
@@ -42,10 +52,11 @@ public:
                             const op_context_t *exponent_context,
                             mantissa_field_instruction *mi,
                             decimal_value_storage initial_value,
-                            instruction_tag tag = instruction_tag())
+                            instruction_tag tag = instruction_tag(),
+                            int32_t decimal_place = 0)
       : integer_field_instruction_base(
             exponent_operator_id, field_type_exponent, optional, id, name, ns,
-            exponent_context, initial_value.storage_, tag) {
+            exponent_context, initial_value.storage_, tag, decimal_place) {
     mantissa_instruction(mi);
   }
 

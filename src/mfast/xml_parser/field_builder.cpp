@@ -161,6 +161,7 @@ void field_builder::build_integer(const int_field_instruction<IntType> *inst) {
       get_ns(inst, alloc()), fop.context_,
       int_value_storage<IntType>(fop.initial_value_), parse_tag(inst));
 
+  instruction->decimal_place(this->get_decimal_place(instruction));
   parent_->add_instruction(instruction);
 }
 
@@ -223,7 +224,7 @@ void field_builder::visit(const decimal_field_instruction *inst, void *) {
         get_ns(inst, alloc()), decimal_op.context_,
         decimal_value_storage(decimal_op.initial_value_), parse_tag(inst));
   }
-
+  instruction->decimal_place(this->get_decimal_place(instruction));
   parent_->add_instruction(instruction);
 }
 
@@ -233,6 +234,8 @@ void field_builder::visit(const ascii_field_instruction *inst, void *) {
       fop.op_, get_presence(inst), get_id(inst), get_name(alloc()),
       get_ns(inst, alloc()), fop.context_,
       string_value_storage(fop.initial_value_), parse_tag(inst));
+
+  instruction->decimal_place(this->get_decimal_place(instruction));
   parent_->add_instruction(instruction);
 }
 
@@ -254,6 +257,8 @@ void field_builder::visit(const unicode_field_instruction *inst, void *) {
       string_value_storage(fop.initial_value_),
       get_length_id(inst, length_attrs), get_length_name(inst, length_attrs),
       get_length_ns(inst, length_attrs), parse_tag(inst));
+
+  instruction->decimal_place(this->get_decimal_place(instruction));
   parent_->add_instruction(instruction);
 }
 
@@ -275,6 +280,8 @@ void field_builder::visit(const byte_vector_field_instruction *inst, void *) {
       string_value_storage(fop.initial_value_),
       get_length_id(inst, length_attrs), get_length_name(inst, length_attrs),
       get_length_ns(inst, length_attrs), parse_tag(inst));
+
+  instruction->decimal_place(this->get_decimal_place(instruction));
   parent_->add_instruction(instruction);
 }
 
@@ -282,6 +289,8 @@ void field_builder::visit(const int32_vector_field_instruction *inst, void *) {
   field_instruction *instruction = new (alloc()) int32_vector_field_instruction(
       get_presence(inst), get_id(inst), get_name(alloc()),
       get_ns(inst, alloc()), parse_tag(inst));
+
+  instruction->decimal_place(this->get_decimal_place(instruction));
   parent_->add_instruction(instruction);
 }
 
@@ -290,6 +299,8 @@ void field_builder::visit(const uint32_vector_field_instruction *inst, void *) {
       uint32_vector_field_instruction(get_presence(inst), get_id(inst),
                                       get_name(alloc()), get_ns(inst, alloc()),
                                       parse_tag(inst));
+
+  instruction->decimal_place(this->get_decimal_place(instruction));
   parent_->add_instruction(instruction);
 }
 
@@ -297,6 +308,8 @@ void field_builder::visit(const int64_vector_field_instruction *inst, void *) {
   field_instruction *instruction = new (alloc()) int64_vector_field_instruction(
       get_presence(inst), get_id(inst), get_name(alloc()),
       get_ns(inst, alloc()), parse_tag(inst));
+
+  instruction->decimal_place(this->get_decimal_place(instruction));
   parent_->add_instruction(instruction);
 }
 
@@ -305,6 +318,8 @@ void field_builder::visit(const uint64_vector_field_instruction *inst, void *) {
       uint64_vector_field_instruction(get_presence(inst), get_id(inst),
                                       get_name(alloc()), get_ns(inst, alloc()),
                                       parse_tag(inst));
+
+  instruction->decimal_place(this->get_decimal_place(instruction));
   parent_->add_instruction(instruction);
 }
 
@@ -350,12 +365,15 @@ void field_builder::visit(const templateref_instruction *, void *) {
     if (target->subinstructions().size() == 1 &&
         target->subinstruction(0)->field_type() == field_type_sequence) {
       field_instruction *new_inst = target->subinstruction(0)->clone(alloc());
+
+      new_inst->decimal_place(this->get_decimal_place(new_inst));
       parent_->add_instruction(new_inst);
       static_cast<sequence_field_instruction *>(new_inst)
           ->ref_instruction(target);
     } else {
       for (size_t i = 0; i < target->subinstructions().size(); ++i) {
-        const field_instruction *sub_inst = target->subinstruction(i);
+        field_instruction *sub_inst=target->subinstruction(i)->clone(alloc());
+        sub_inst->decimal_place(this->get_decimal_place(sub_inst));
         parent_->add_instruction(sub_inst);
       }
     }
@@ -364,6 +382,7 @@ void field_builder::visit(const templateref_instruction *, void *) {
     instruction = new (alloc()) templateref_instruction(
         static_cast<uint16_t>(parent_->num_instructions()));
 
+    instruction->decimal_place(this->get_decimal_place(instruction));
     parent_->add_instruction(instruction);
   }
 }
@@ -423,7 +442,7 @@ void field_builder::visit(const group_field_instruction *inst, void *) {
   } else {
     instruction->ref_instruction(inst);
   }
-
+  instruction->decimal_place(this->get_decimal_place(instruction));
   parent_->add_instruction(instruction);
 }
 
@@ -487,7 +506,7 @@ void field_builder::visit(const sequence_field_instruction *inst, void *) {
       element_instruction, ref_inst, get_length_instruction(inst),
       get_typeRef_name(element_), get_typeRef_ns(element_), inst->cpp_ns(),
       parse_tag(inst));
-
+  instruction->decimal_place(this->get_decimal_place(instruction));
   parent_->add_instruction(instruction);
 }
 
@@ -645,6 +664,7 @@ void field_builder::visit(const enum_field_instruction *inst, void *) {
       inst->elements_ == nullptr ? nullptr : inst, inst->cpp_ns(),
       parse_tag(inst));
 
+  instruction->decimal_place(this->get_decimal_place(instruction));
   parent_->add_instruction(instruction);
 }
 

@@ -16,7 +16,7 @@ field_instruction::field_instruction(const field_instruction &other)
       has_initial_value_(other.has_initial_value_),
       field_type_(other.field_type_),
       previous_value_shared_(other.previous_value_shared_), id_(other.id_),
-      name_(other.name_), ns_(other.ns_), tag_(other.tag_) {}
+      name_(other.name_), ns_(other.ns_), tag_(other.tag_), decimal_place_(other.decimal_place_) {}
 
 void field_instruction::destruct_value(value_storage &, allocator *) const {}
 

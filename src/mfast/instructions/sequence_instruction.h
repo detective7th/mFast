@@ -19,7 +19,7 @@ public:
       const group_field_instruction *ref_instruction,
       const uint32_field_instruction *sequence_length_instruction,
       const char *typeref_name, const char *typeref_ns, const char *cpp_ns,
-      instruction_tag tag = instruction_tag());
+      instruction_tag tag = instruction_tag(), int32_t decimal_place = 0);
 
   virtual void construct_value(value_storage &storage,
                                allocator *alloc) const override;
@@ -88,11 +88,12 @@ public:
                           uint32_field_instruction *sequence_length_instruction,
                           const char *typeref_name, const char *typeref_ns,
                           const char *cpp_ns,
-                          instruction_tag tag = instruction_tag())
+                          instruction_tag tag = instruction_tag(),
+                          int32_t decimal_place = 0)
       : sequence_field_instruction(optional, id, name, ns, dictionary,
                                    subinstructions, element_instruction,
                                    ref_instruction, sequence_length_instruction,
-                                   typeref_name, typeref_ns, cpp_ns, tag) {}
+                                   typeref_name, typeref_ns, cpp_ns, tag, decimal_place) {}
 
   virtual sequence_instruction_ex<T> *
   clone(arena_allocator &alloc) const override {

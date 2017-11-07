@@ -11,8 +11,8 @@ namespace mfast {
 integer_field_instruction_base::integer_field_instruction_base(
     operator_enum_t operator_id, int field_type, presence_enum_t optional,
     uint32_t id, const char *name, const char *ns, const op_context_t *context,
-    const value_storage &initial_storage, instruction_tag tag)
-    : field_instruction(operator_id, field_type, optional, id, name, ns, tag),
+    const value_storage &initial_storage, instruction_tag tag, int32_t decimal_place)
+        : field_instruction(operator_id, field_type, optional, id, name, ns, tag, decimal_place),
       op_context_(context), initial_value_(initial_storage),
       prev_value_(&prev_storage_),
       initial_or_default_value_(initial_storage.is_empty() ? &default_value_

@@ -15,8 +15,8 @@ public:
                                 field_type_enum_t field_type,
                                 presence_enum_t optional, uint32_t id,
                                 const char *name, const char *ns,
-                                std::size_t element_size, instruction_tag tag)
-      : field_instruction(operator_id, field_type, optional, id, name, ns, tag),
+                                std::size_t element_size, instruction_tag tag, int32_t decimal_place = 0)
+          : field_instruction(operator_id, field_type, optional, id, name, ns, tag, decimal_place),
         element_size_(element_size) {}
 
   vector_field_instruction_base(const vector_field_instruction_base &other)

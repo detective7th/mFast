@@ -34,10 +34,11 @@ class vector_field_instruction : public vector_field_instruction_base {
 public:
   vector_field_instruction(presence_enum_t optional, uint32_t id,
                            const char *name, const char *ns,
-                           instruction_tag tag = instruction_tag())
+                           instruction_tag tag = instruction_tag(),
+                           int32_t decimal_place = 0)
       : vector_field_instruction_base(operator_none,
                                       detail::vector_field_type<T>::value,
-                                      optional, id, name, ns, sizeof(T), tag)
+                                      optional, id, name, ns, sizeof(T), tag, decimal_place)
 
   {}
 

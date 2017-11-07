@@ -23,9 +23,10 @@ public:
                           instructions_view_t subinstructions,
                           const char *typeref_name, const char *typeref_ns,
                           const char *cpp_ns,
-                          instruction_tag tag = instruction_tag())
+                          instruction_tag tag = instruction_tag(),
+                          int32_t             decimal_place = 0)
       : field_instruction(operator_none, field_type_group, optional, id, name,
-                          ns, tag),
+                          ns, tag, decimal_place),
         referable_instruction<group_field_instruction>(nullptr, cpp_ns),
         dictionary_(dictionary), typeref_name_(typeref_name),
         typeref_ns_(typeref_ns), segment_pmap_size_(0),
@@ -119,20 +120,22 @@ public:
                        instructions_view_t subinstructions,
                        const char *typeref_name, const char *typeref_ns,
                        const char *cpp_ns,
-                       instruction_tag tag = instruction_tag())
+                       instruction_tag tag = instruction_tag(),
+                       int32_t             decimal_place = 0)
       : group_field_instruction(optional, id, name, ns, dictionary,
                                 subinstructions, typeref_name, typeref_ns,
-                                cpp_ns, tag) {}
+                                cpp_ns, tag, decimal_place) {}
 
   group_instruction_ex(presence_enum_t optional, uint32_t id, const char *name,
                        const char *ns, const char *dictionary,
                        const group_field_instruction *ref_instruction,
                        const char *typeref_name, const char *typeref_ns,
                        const char *cpp_ns,
-                       instruction_tag tag = instruction_tag())
+                       instruction_tag tag = instruction_tag(),
+                       int32_t decimal_place = 0)
       : group_field_instruction(optional, id, name, ns, dictionary,
                                 ref_instruction->subinstructions(),
-                                typeref_name, typeref_ns, cpp_ns, tag) {
+                                typeref_name, typeref_ns, cpp_ns, tag, decimal_place) {
     this->ref_instruction(ref_instruction);
   }
 

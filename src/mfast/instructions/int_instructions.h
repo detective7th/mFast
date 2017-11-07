@@ -18,7 +18,7 @@ public:
                                  const char *name, const char *ns,
                                  const op_context_t *context,
                                  const value_storage &initial_storage,
-                                 instruction_tag tag);
+                                 instruction_tag tag, int32_t decimal_place = 0);
 
   integer_field_instruction_base(const integer_field_instruction_base &other);
   virtual void construct_value(value_storage &storage,
@@ -61,7 +61,7 @@ public:
                         uint32_t id, const char *name, const char *ns,
                         const op_context_t *context,
                         int_value_storage<T> initial_value,
-                        instruction_tag tag = instruction_tag());
+                        instruction_tag tag = instruction_tag(), int32_t decimal_place = 0);
 
   int_field_instruction(const int_field_instruction &other);
   virtual void accept(field_instruction_visitor &visitor,
@@ -74,10 +74,10 @@ template <typename T>
 int_field_instruction<T>::int_field_instruction(
     operator_enum_t operator_id, presence_enum_t optional, uint32_t id,
     const char *name, const char *ns, const op_context_t *context,
-    int_value_storage<T> initial_value, instruction_tag tag)
+    int_value_storage<T> initial_value, instruction_tag tag, int32_t decimal_place)
     : integer_field_instruction_base(operator_id, field_type_trait<T>::id,
                                      optional, id, name, ns, context,
-                                     initial_value.storage_, tag) {}
+                                     initial_value.storage_, tag, decimal_place) {}
 
 template <typename T>
 inline int_field_instruction<T>::int_field_instruction(

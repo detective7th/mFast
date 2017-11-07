@@ -94,16 +94,36 @@ template <> struct mref_of<enum_cref> { typedef enum_mref type; };
 template <typename Tag>
 class enum_field_instruction_ex : public enum_field_instruction {
 public:
-  enum_field_instruction_ex(
-      operator_enum_t operator_id, presence_enum_t optional, uint32_t id,
-      const char *name, const char *ns, const op_context_t *context,
-      int_value_storage<uint64_t> initial_value, const char **element_names,
-      const uint64_t *element_values, uint64_t num_elements,
-      const enum_field_instruction *ref, const char *cpp_ns,
-      instruction_tag tag = instruction_tag())
-      : enum_field_instruction(operator_id, optional, id, name, ns, context,
-                               initial_value, element_names, element_values,
-                               num_elements, ref, cpp_ns, tag) {}
+  enum_field_instruction_ex(operator_enum_t               operator_id,
+                            presence_enum_t               optional,
+                            uint32_t                      id,
+                            const char*                   name,
+                            const char*                   ns,
+                            const op_context_t*           context,
+                            int_value_storage<uint64_t>   initial_value,
+                            const char**                  element_names,
+                            const uint64_t*               element_values,
+                            uint64_t                      num_elements,
+                            const enum_field_instruction* ref,
+                            const char*                   cpp_ns,
+                            instruction_tag               tag=instruction_tag(),
+                            int32_t                       decimal_place = 0)
+    : enum_field_instruction(operator_id,
+                             optional,
+                             id,
+                             name,
+                             ns,
+                             context,
+                             initial_value,
+                             element_names,
+                             element_values,
+                             num_elements,
+                             ref,
+                             cpp_ns,
+                             tag,
+                             decimal_place)
+  {
+  }
 };
 
 template <typename Derived, typename EnumClassType>

@@ -22,16 +22,17 @@ struct fast_xml_attributes {
   const char *presence_;
   const char *charset_;
   const char *tag_;
+  const char *decimal_place_;
 
   fast_xml_attributes()
       : name_(nullptr), id_(nullptr), ns_(nullptr), templateNs_(nullptr),
         dictionary_(nullptr), presence_(nullptr), charset_(nullptr),
-        tag_(nullptr) {}
+        tag_(nullptr), decimal_place_(nullptr) {}
 
   fast_xml_attributes(const char *name)
       : name_(name), id_(nullptr), ns_(nullptr), templateNs_(nullptr),
         dictionary_(nullptr), presence_(nullptr), charset_(nullptr),
-        tag_(nullptr) {}
+        tag_(nullptr), decimal_place_(nullptr) {}
 
   fast_xml_attributes(const XMLAttribute *attr) {
     name_ = nullptr;
@@ -42,7 +43,7 @@ struct fast_xml_attributes {
     presence_ = nullptr;
     charset_ = nullptr;
     tag_ = nullptr;
-
+    decimal_place_ = nullptr;
     set(attr);
   }
 
@@ -66,6 +67,8 @@ struct fast_xml_attributes {
         charset_ = attr->Value();
       else if (std::strcmp(name, "mfast:tag") == 0)
         tag_ = attr->Value();
+      else if (std::strcmp(name, "decimalPlaces") == 0)
+          decimal_place_ = attr->Value();
       attr = attr->Next();
     }
   }
@@ -79,6 +82,11 @@ struct fast_xml_attributes {
 
   uint32_t get_id(const field_instruction *inst) const {
     return id_ ? boost::lexical_cast<uint32_t>(id_) : inst->id();
+  }
+
+  int32_t get_decimal_place(const field_instruction* inst) const
+  {
+    return decimal_place_ ? boost::lexical_cast<int32_t>(decimal_place_) : inst->decimal_place();
   }
 
   const char *get_name(arena_allocator &alloc) const {

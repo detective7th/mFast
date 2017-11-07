@@ -112,6 +112,7 @@ public:
   virtual std::size_t pmap_size() const;
 
   bool is_nullable() const { return nullable_flag_; }
+  int32_t decimal_place() const { return decimal_place_; }
   bool optional() const { return optional_flag_; }
   uint32_t id() const { return id_; }
   const char *name() const { return name_; }
@@ -140,15 +141,14 @@ public:
   inline field_instruction(operator_enum_t operator_id, int field_type,
                            presence_enum_t optional, uint32_t id,
                            const char *name, const char *ns,
-                           instruction_tag tag);
-
+                           instruction_tag tag, int32_t decimal_place = 0);
   field_instruction(const field_instruction &other);
 
   void optional(bool v) {
     optional_flag_ = v;
     update_invariant();
   }
-
+  void decimal_place(int32_t v) { decimal_place_ = v;}
   void id(uint32_t v) { id_ = v; }
   void name(const char *v) { name_ = v; }
   void ns(const char *v) { ns_ = v; }
@@ -181,6 +181,7 @@ protected:
   const char *name_;
   const char *ns_;
   instruction_tag tag_;
+  int32_t decimal_place_{0};
 };
 
 template <typename T> class referable_instruction {
@@ -201,7 +202,7 @@ inline field_instruction::field_instruction(operator_enum_t operator_id,
                                             int field_type,
                                             presence_enum_t optional,
                                             uint32_t id, const char *name,
-                                            const char *ns, instruction_tag tag)
+                                            const char *ns, instruction_tag tag, int32_t  decimal_place)
     : operator_id_(operator_id),
       is_array_(field_type >= field_type_ascii_string &&
                 field_type <= field_type_sequence),
@@ -211,5 +212,5 @@ inline field_instruction::field_instruction(operator_enum_t operator_id,
                     ((operator_id == operator_constant) && optional)),
       has_initial_value_(false), field_type_(field_type),
       previous_value_shared_(false), id_(id), name_(name), ns_(ns),
-      tag_(std::move(tag)) {}
+      tag_(std::move(tag)), decimal_place_(decimal_place) {}
 }

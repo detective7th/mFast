@@ -15,10 +15,10 @@ sequence_field_instruction::sequence_field_instruction(
     const group_field_instruction *ref_inst,
     const uint32_field_instruction *sequence_length_instruction,
     const char *typeref_name, const char *typeref_ns, const char *cpp_ns,
-    instruction_tag tag)
+    instruction_tag tag, int32_t decimal_place)
     : group_field_instruction(optional, id, name, ns, dictionary,
                               subinstructions, typeref_name, typeref_ns, cpp_ns,
-                              tag),
+                              tag, decimal_place),
       sequence_length_instruction_(sequence_length_instruction),
       element_instruction_(element_instruction) {
   field_type_ = field_type_sequence;
