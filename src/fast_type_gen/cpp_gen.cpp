@@ -95,7 +95,7 @@ void cpp_gen::gen_integer(const mfast::integer_field_instruction_base *inst,
             pIndex);
   out_ << "  int_value_storage<" << cpp_type << "_t>(" << initial_value
        << "), // initial_value\n"
-       << "  " << inst->tag() << "); // tag\n\n";
+       << "  " << inst->tag() << ", // tag\n";
 }
 
 void cpp_gen::visit(const mfast::int32_field_instruction *inst, void *pIndex) {
@@ -196,7 +196,7 @@ void cpp_gen::visit(const mfast::unicode_field_instruction *inst,
          << "  \"" << inst->length_ns() << "\"); // length ns\n\n";
   } else {
     out_ << ", // initial_value\n"
-         << "  " << inst->tag() << "\"); // tag\n";
+         << "  " << inst->tag() << "); // tag\n";
   }
 }
 

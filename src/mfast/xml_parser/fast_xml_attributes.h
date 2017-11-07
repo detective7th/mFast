@@ -68,7 +68,7 @@ struct fast_xml_attributes {
       else if (std::strcmp(name, "mfast:tag") == 0)
         tag_ = attr->Value();
       else if (std::strcmp(name, "decimalPlaces") == 0)
-          decimal_place_ = attr->Value();
+        decimal_place_ = attr->Value();
       attr = attr->Next();
     }
   }

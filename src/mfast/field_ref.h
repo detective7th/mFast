@@ -56,6 +56,7 @@ public:
   bool absent() const {
     return instruction_ == nullptr || (optional() && storage_->is_empty());
   }
+  int32_t decimal_place() const { return instruction_->decimal_place(); }
   bool present() const { return !absent(); }
   bool optional() const { return instruction_->optional(); }
   field_type_enum_t field_type() const { return instruction_->field_type(); }
