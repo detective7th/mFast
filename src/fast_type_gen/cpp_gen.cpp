@@ -229,12 +229,11 @@ void cpp_gen::visit(const mfast::byte_vector_field_instruction *inst,
          << "  " << inst->length_id() << ", // length id\n"
          << "  \"" << inst->length_name() << "\", // length name\n"
          << "  \"" << inst->length_ns() << "\", // length ns\n"
-         << "  " << inst->tag() << ", // tag\n";
+         << "  " << inst->tag() << "); // tag\n\n";
   } else {
     out_ << ", // initial_value\n"
-         << "  " << inst->tag() << ", // tag\n";
+         << "  " << inst->tag() << "); // tag\n\n";
   }
-  out_ << "  " << inst->decimal_place() << "); //decimal_place \n\n";
 }
 
 void cpp_gen::gen_int_vector(const char *cpp_type,
@@ -376,8 +375,7 @@ void cpp_gen::visit(const mfast::group_field_instruction *inst, void *pIndex) {
        << "\", // typeRef name \n"
        << "  \"" << inst->typeref_ns() << "\", // typeRef ns \n"
        << "  \"\", // cpp_ns\n"
-       << "  " << inst->tag() << ", // tag\n"
-       << "  " << inst->decimal_place() << "); //decimal_place \n\n";
+       << "  " << inst->tag() << "); // tag\n\n";
 
   if (pIndex == nullptr) {
     out_ << "  return &the_instruction;\n"
@@ -486,8 +484,7 @@ void cpp_gen::visit(const mfast::sequence_field_instruction *inst,
        << "  \"" << inst->typeref_name() << "\", // typeRef name \n"
        << "  \"" << inst->typeref_ns() << "\", // typeRef ns \n"
        << "  \"\", // cpp_ns\n"
-       << "  " << inst->tag() << ", //tag \n"
-       << "  " << inst->decimal_place() << "); //decimal_place \n\n";
+       << "  " << inst->tag() << "); //tag \n\n";
 
   if (pIndex == nullptr) {
     out_ << "  return &the_instruction;\n"
@@ -664,8 +661,7 @@ void cpp_gen::visit(const mfast::enum_field_instruction *inst, void *pIndex) {
        << "  " << num_elements_name.str() << ",// num elements\n"
        << "  nullptr, // ref_instruction\n"
        << "  nullptr, // cpp_ns\n"
-       << "  " << inst->tag() << ", //tag \n"
-       << "  " << inst->decimal_place() << "); //decimal_place \n\n";
+       << "  " << inst->tag() << "); //tag \n\n";
 
   if (pIndex == nullptr) {
     out_ << "  return &the_instruction;\n"
